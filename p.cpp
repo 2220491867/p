@@ -29,17 +29,17 @@ void menu()
 {
 	system("cls");
 	printf("\n\n\n");
-	printf("\t\t\t\t欢迎使用PCM计算器\n");
-	printf("\t\t\t--------------------------------------\n\n");
-	printf("\t\t\t1.抽样值转8位非线性PCM编码并计算量化值\n\n");
-	printf("\t\t\t2.使用8位非线性PCM编码转量化值\n\n\n\n\n\n\n");
-	printf("\t\t\t你的选择:\n\n\n\n");
+	printf("\t\t\t欢迎使用PCM计算器\n");
+	printf("\t\t--------------------------------------\n\n");
+	printf("\t\t1.抽样值转8位非线性PCM编码并计算量化值\n\n");
+	printf("\t\t2.使用8位非线性PCM编码转量化值\n\n\n\n\n\n\n");
+	printf("\t\t你的选择:\n\n\n\n");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
 	//system("color 0a");
 	printf("\t\t\t\t\t\t\t\t版本-V1.0.2\n");
 	printf("\t\t\t\t\t\t\t\t鱼汤！ 制作\n");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);    //原色7
-	gotoxy(33,15);                                    //移动光标
+	gotoxy(25,15);                                    //移动光标
 }
 void error1()
 {
@@ -377,7 +377,7 @@ void gny()                   //抽样值编码
 void gne(int* arr, int len)                  //PCM编码转量化值
 {
 
-	int	a1, a[8], b = 0, c1, c2, d,d1, d2, d3 = 1;
+	int	a1, a[8],a2[11], b = 0, c1, c2, d,d1, d2, d3 = 1;
 	double d4;
 	char z[9];
 	while (b<8)
@@ -416,16 +416,31 @@ void gne(int* arr, int len)                  //PCM编码转量化值
 		d3 = -1;
 	}
 	d4 = (d + double(d2) / 2)*d3;
-	printf("\n\n量化编码是：%.1lf\n\n\n\n", d4);
+	printf("\n\n量化编码是：%.1lf\n\n", d4);
 
-	//gns(d);
+	for (b = 0; b<11 ;b++)
+	{
+		a2[b] =d % 2;
+		d = d / 2;
+	}
+	printf("后7位的11位线性编码：");
+	for (b = 10; b> -1; b--)
+	{
+
+		printf("%d",a2[b]);
+	}
+	printf("\n\n\n\n\n");
 }
 
-void gns(int a)
-{
-	
-	
-}
+//void gns(int a)
+//{
+//	int a1[11], b = 0;
+//	for (b = 0; a == 0;b++)
+//	{
+//		a1[b] = a % 2;
+//	}
+//
+//}
 
 
 
