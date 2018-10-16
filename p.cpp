@@ -32,12 +32,11 @@ void menu()
 	printf("\t\t\t\t欢迎使用PCM计算器\n");
 	printf("\t\t\t--------------------------------------\n\n");
 	printf("\t\t\t1.抽样值转8位非线性PCM编码并计算量化值\n\n");
-	printf("\t\t\t2.使用8位非线性PCM编码转量化值\n\n");
-	printf("\t\t\t3.用7位PCM编码转11位线性1编码\n\n\n\n\n");
+	printf("\t\t\t2.使用8位非线性PCM编码转量化值\n\n\n\n\n\n\n");
 	printf("\t\t\t你的选择:\n\n\n\n");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
 	//system("color 0a");
-	printf("\t\t\t\t\t\t\t\t版本-V1.0.3\n");
+	printf("\t\t\t\t\t\t\t\t版本-V1.0.2\n");
 	printf("\t\t\t\t\t\t\t\t鱼汤！ 制作\n");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);    //原色7
 	gotoxy(33,15);                                    //移动光标
@@ -77,13 +76,11 @@ void sr2()
 		{
 			b1 = 0;
 			a[b] = z[b] - 48;
-			//p1[b] = a[b];
 			if (a[b] != 0 && a[b] != 1)
 			{
 				printf("\n\n你的输入真的有问题，只能输0、1\n\n3秒后重输！！！\n\n\n");
 				Sleep(3000);
 				b = 8;
-				//break;
 				b1 = 1;
 			}
 			b++;
@@ -98,35 +95,43 @@ void sr2()
 	}
 	gne(a, 8);
 }
-void sr3()
-{
-	char a[15];
-	int b=0,c1[7],c2[11];
-
-	do
-	{
-		do
-		{
-			system("cls");
-			printf("\n\n\n");
-			printf("输入7位就转化为11位，反之转化为7位\n\n");
-			printf("请输入你要转化的数\n\n");
-			scanf("%s", &a);
-			if (strlen(a) != 7 && strlen(a) != 11)
-			{
-				printf("\n\n\n你输入的有问题！！！\n\n你输入了：%d位！！！\n\n请你输入7位或11位！！！\n\n3秒后重输！！！\n\n\n", strlen(a));
-				Sleep(3000);
-			}
-		} while (strlen(a) != 7 && strlen(a) != 11);
-		switch (strlen(a))
-		{
-		case 7:
-
-		}
-
-	} while ();
-
-}
+//void sr3()
+//{
+//	char a[15];
+//	int b=0,b1=0,c1[11];
+//
+//	do
+//	{
+//		b1 = 0;
+//		do
+//		{
+//			system("cls");
+//			printf("\n\n\n");
+//			printf("输入11位就转化为7位\n\n");
+//			printf("请输入你要转化的数\n\n");
+//			scanf("%s", &a);
+//			if (strlen(a) != 11)
+//			{
+//				printf("\n\n\n你输入的有问题！！！\n\n你输入了：%d位！！！\n\n请你输入11位！！！\n\n3秒后重输！！！\n\n\n", strlen(a));
+//				Sleep(3000);
+//			}
+//		} while (strlen(a) != 11);
+//		while(b < 8)
+//		{
+//			c1[b] = a[b] - 48;
+//			if (c1[b] != 0 && c1[b] != 1)
+//			{
+//				printf("\n\n你的输入真的有问题，只能输0、1\n\n3秒后重输！！！\n\n\n");
+//				Sleep(3000);
+//				b=8;
+//				b1 = 1;
+//			}
+//			b++;
+//		}
+//	} while (b1);
+//
+//	gns(c1, 11);
+//}
 void gny()                   //抽样值编码
 {
 	int a, a1, b[8], c1, d1, d2, d3 = 0;
@@ -372,8 +377,8 @@ void gny()                   //抽样值编码
 void gne(int* arr, int len)                  //PCM编码转量化值
 {
 
-	int	a1, a[8], b = 0, c1, c2, d1, d2, d3 = 1;
-	double d;
+	int	a1, a[8], b = 0, c1, c2, d,d1, d2, d3 = 1;
+	double d4;
 	char z[9];
 	while (b<8)
 	{
@@ -405,15 +410,18 @@ void gne(int* arr, int len)                  //PCM编码转量化值
 	case 6:d2 = 32; break;
 	case 7:d2 = 64; break;
 	}
+	d = d1 + d2*c2;
 	if (a[0] == 0)
 	{
 		d3 = -1;
 	}
-	d = (d1 + d2*c2 + double(d2) / 2)*d3;
-	printf("\n\n量化编码是：%.1lf\n\n\n\n", d);
+	d4 = (d + double(d2) / 2)*d3;
+	printf("\n\n量化编码是：%.1lf\n\n\n\n", d4);
+
+	//gns(d);
 }
 
-void gns(int* arr,int len)
+void gns(int a)
 {
 	
 	
@@ -435,19 +443,16 @@ int main()
 		}
 	} while (a != 1 && a != 2);
 
-	switch (a)
+	if (a == 1)
 	{
-	case 1:
 		gny();
-		break;
-	case 2:
-		sr2;
-		break;
-	case 3:
-		sr3();
-		break;
-
 	}
+	else
+	{
+		sr2();
+	}
+	
+
 	
 	system("pause");
 	return 0;
